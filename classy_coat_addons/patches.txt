@@ -4,3 +4,5 @@
 
 [post_model_sync]
 # Patches added in this section will be executed after doctypes are migrated
+classy_coat_addons.patches.fix_tax_template_descriptions
+classy_coat_addons.patches.add_aed_currency_translation
