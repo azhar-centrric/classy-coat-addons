@@ -44,7 +44,10 @@ app_license = "mit"
 
 # include js in doctype views
 # doctype_js = {"doctype" : "public/js/doctype.js"}
-# doctype_list_js = {"doctype" : "public/js/doctype_list.js"}
+doctype_list_js = {
+	"Quotation": "public/js/list_view_id_column.js",
+	"Sales Invoice": "public/js/list_view_id_column.js",
+}
 # doctype_tree_js = {"doctype" : "public/js/doctype_tree.js"}
 # doctype_calendar_js = {"doctype" : "public/js/doctype_calendar.js"}
 
@@ -195,6 +198,9 @@ jinja = {
 # override_whitelisted_methods = {
 # 	"frappe.desk.doctype.event.event.get_events": "classy_coat_addons.event.get_events"
 # }
+override_whitelisted_methods = {
+	"frappe.utils.print_format.download_pdf": "classy_coat_addons.overrides.print_format.pdf_filename.download_pdf"
+}
 #
 # each overriding function accepts a `data` argument;
 # generated from the base implementation of the doctype dashboard,
