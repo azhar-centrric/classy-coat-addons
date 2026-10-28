@@ -6,3 +6,4 @@
 # Patches added in this section will be executed after doctypes are migrated
 classy_coat_addons.patches.fix_tax_template_descriptions
 classy_coat_addons.patches.add_aed_currency_translation
+classy_coat_addons.patches.attention_to_to_autocomplete
