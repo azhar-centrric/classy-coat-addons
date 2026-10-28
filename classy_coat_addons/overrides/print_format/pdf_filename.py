@@ -9,6 +9,13 @@ from frappe.utils.print_format import download_pdf as original_download_pdf
 # document's own ID. Both have a customer_name field already fetched onto the document.
 DOCTYPES_WITH_CUSTOMER_IN_FILENAME = ("Quotation", "Sales Invoice")
 
+# The field that links each doctype to its Project - Quotation only has the custom
+# cen_choose_project field, Sales Invoice has the standard "project" link.
+PROJECT_FIELD_BY_DOCTYPE = {
+	"Quotation": "cen_choose_project",
+	"Sales Invoice": "project",
+}
+
 
 def sanitize_for_filename(value: str) -> str:
 	# Same characters the original download_pdf strips from the document name, plus the other
@@ -45,6 +52,12 @@ def download_pdf(
 	if not customer_name:
 		return
 
-	frappe.local.response.filename = "{name} - {customer}.pdf".format(
-		name=sanitize_for_filename(name), customer=sanitize_for_filename(customer_name)
-	)
+	filename_parts = [sanitize_for_filename(name), sanitize_for_filename(customer_name)]
+
+	project_field = PROJECT_FIELD_BY_DOCTYPE[doctype]
+	project = doc.get(project_field) if doc else frappe.db.get_value(doctype, name, project_field)
+	if project:
+		project_name = frappe.db.get_value("Project", project, "project_name") or project
+		filename_parts.append(sanitize_for_filename(project_name))
+
+	frappe.local.response.filename = " - ".join(filename_parts) + ".pdf"
