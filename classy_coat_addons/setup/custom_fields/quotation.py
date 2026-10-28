@@ -4,7 +4,10 @@ def get_quotation_fields():
 			{
 				"fieldname": "cc_attention_to",
 				"label": "Attention To",
-				"fieldtype": "Data",
+				"fieldtype": "Autocomplete",
+				# Suggests Mr./Ms. on click (see public/js/attention_to_salutation.js for
+				# ignore_validation), but the field still accepts any typed name after that.
+				"options": "Mr.\nMs.",
 				# cen_payment_terms ("Payment Term") sits in the Details tab, right column, after Valid Till.
 				"insert_after": "cen_payment_terms",
 			},

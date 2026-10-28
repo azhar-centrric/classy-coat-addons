@@ -53,7 +53,9 @@ doctype_list_js = {
 
 doctype_js = {
 	"Employee": "public/js/employee.js",
-	"Quotation": "public/js/quotation.js",
+	"Quotation": ["public/js/quotation.js", "public/js/attention_to_salutation.js"],
+	"Sales Order": "public/js/attention_to_salutation.js",
+	"Sales Invoice": "public/js/attention_to_salutation.js",
 }
 
 # Svg Icons
